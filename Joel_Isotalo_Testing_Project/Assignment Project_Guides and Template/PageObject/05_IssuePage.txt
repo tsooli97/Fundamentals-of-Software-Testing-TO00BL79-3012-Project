@@ -1,0 +1,61 @@
+# Issues functionality test suites
+
+#******************** Settings ************************
+
+*** Settings ***
+
+Documentation	Issues test scenario. Create, read, update and delete operations.
+
+Pre Condition	Open browser, log in using valid credentials. Ensure that at least one project is created on the account beforehand. 
+Post Condition	Close all browsers
+Tags 
+
+#******************* Common Variables ********************
+
+*** Variables ***
+
+IssuesUrl = https://gitlab.com/dashboard/issues
+GroupIssuesUrl = https://gitlab.com/<group name>/<project name>/-/issues
+Valid_IssueTitle = FirstIssue
+Updated_IssueTitle = UpdatedFirstIssue
+
+#******************** Test Cases *************************
+
+*** Test Case ***
+
+# Positive Tests
+
+Create issue
+    Navigate to issues page	IssuesUrl
+    Click on 'Select project to create issue'
+    Select any project
+	Click on 'New issue in <project name>'
+	Input Valid_IssueTitle in field 'Title (required)'
+	Select 'Create issue'
+	Verify that page should contain view for newly created issue, and that the new issue title is Valid_IssueTitle
+	Note that GroupIssuesUrl = the current page url (https://gitlab.com/<group name>/<project name>/-/issues)
+
+Update name of issue
+    Navigate to issues page	GroupIssuesUrl
+    Click on Valid_IssueTitle
+	Select edit
+	Change name Valid_IssueTitle to Updated_IssueTitle
+	Select 'Save changes'
+	Verify that issue title on page shows Updated_IssueTitle
+
+Create second issue with previous updated name
+    Navigate to issues page	GroupIssuesUrl
+    Click on 'New issue'
+	Input Updated_IssueTitle in field 'Title (required)'
+	Change name Valid_IssueTitle to Updated_IssueTitle
+	Select 'Create issue'
+    Verify that page should contain view for newly created issue, and that the new issue title is Updated_IssueTitle
+
+Delete first issue
+	Navigate to issues page	IssuesUrl
+	Select original issue with name Updated_IssueTitle
+	Select three vertical dots in top right corner
+	Select 'Delete issue'
+	Click on 'Delete issue'
+	Verify that page IssuesUrl shows "The issue was successfully deleted."
+	Verify that the issue is gone on the page IssuesUrl

@@ -1,0 +1,79 @@
+### Project dashboard page functionality test suite
+
+#******************** Settings ************************
+
+*** Settings ***
+
+Documentation	Testing project dashboard functionality, for example create, read, update and delete.
+
+Pre Condition	Open browser and log in using valid credentials
+Post Condition	Close all browsers
+Tags	Project, Dashboard, TS-3-Project-CRUD
+
+#******************* Common Variables ********************
+
+*** Variables ***
+
+ProjectUrl = https://gitlab.com/dashboard/projects
+Valid_ProjectName = FirstProject
+Valid_TemplateName = TemplateProject
+Valid_RenamedTemplateName = RenamedTemplateProject
+
+#******************** Test Cases *************************
+
+*** Test Case ***
+
+# Positive Tests
+
+Create blank project
+    Navigate to project dashboard page ProjectUrl
+    Click on button 'New project'
+	Select 'Create blank project'
+    Input Valid_ProjectName in 'Project name'
+    Select 'Create project' to submit form
+    Verify that page should contain "Project 'FirstProject' was successfully created."
+
+Create template project
+    Navigate to project dashboard page ProjectUrl
+    Click on button 'New project'
+	Select 'Create from template'
+	Select 'Use template' next to 'Ruby on Rails'
+    Input Valid_TemplateName in 'Project name'
+    Select 'Create project' to submit form
+    Verify that page should contain "The project was successfully imported."
+
+Update name of template project
+    Navigate to project dashboard page ProjectUrl
+    Select project with name Valid_TemplateName
+	Click on three vertical dots near top right corner
+    Select 'Project settings'
+    Empty input field 'Project name'
+	Input Valid_RenamedTemplateName in 'Project name'
+	Click on button 'Save changes'
+    Verify that page should contain "Project 'RenamedTemplateProject' was successfully updated."
+
+Delete template project
+    Navigate to project dashboard page ProjectUrl
+    Select project with name Valid_TemplateName
+	Click on three vertical dots near top right corner
+    Select 'Project settings'
+    Selected 'Advanced'
+	At the bottom of the page select 'Delete project'
+	Copy and paste the text on the greyed out background into the input field, and select 'Yes, delete project'
+	Click on button 'Save changes'
+    Verify that dashboard page should contain "Project '<group name> / TemplateProject-deleted-<number series>' will be deleted on <current date>"
+	Verify that Valid_TemplateName is not visible in the list of existing projects
+
+# Negative Tests
+
+Create a blank project with existing name
+	Ensure that project by name Valid_ProjectName already exists
+	Navigate to project dashboard page ProjectUrl
+    Click on button 'New project'
+	Select 'Create blank project'
+    Input Valid_ProjectName in 'Project name'
+    Select 'Create project' to submit form
+    Verify that page should contain error "The form contains the following errors: Project namespace name has already been taken Name has already been taken Path has already been taken"
+
+
+

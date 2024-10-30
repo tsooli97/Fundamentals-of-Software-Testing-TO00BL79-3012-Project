@@ -1,0 +1,93 @@
+### Register functionality test suite
+
+#******************** Settings ************************
+
+*** Settings ***
+
+Documentation	Testing registration functionality. Register test scenario covering both valid and invalid user credentials and inputs.
+
+Pre Condition	Open browser
+Post Condition	Close all browsers
+Tags	Register, TS-2-Register
+
+#******************* Common Variables ********************
+
+*** Variables ***
+
+RegisterUrl = https://gitlab.com/users/sign_up
+Valid_Firstname = John
+Valid_Lastname = Doe
+Valid_Username = validtestusername123
+Valid_Email = validtestuser123@example.com
+Valid_Password = validpassword123
+Invalid_Email = invalidemail
+Existing_Username = username1
+Empty = 
+
+#******************** Test Cases *************************
+
+*** Test Case ***
+
+# Positive Tests
+
+Register with valid username and password
+    Navigate to registration page at RegisterUrl
+	Input first name Valid_Firstname
+	Input last name Valid_Lastname
+    Input username Valid_Username
+    Input email	Valid_Email
+    Input password Valid_Password
+    Submit registration form
+    Page should contain field for verify email code sent to user email
+
+# Negative Tests
+
+Register with existing username
+    Navigate to registration page at RegisterUrl
+	Input first name Valid_Firstname
+	Input last name Valid_Lastname
+    Input username Existing_Username
+    Input email	Valid_Email
+    Input password Valid_Password
+    Verify that text under 'Username' input field contains message "Username is already taken."
+	Submit registration form
+	Page should contain error "1 error prohibited this user from being saved: A user, alias, or group already exists with that username."
+
+Register with empty password
+    Navigate to registration page at RegisterUrl
+	Input first name Valid_Firstname
+	Input last name Valid_Lastname
+    Input username Valid_Username
+    Input email	Valid_Email
+    Input password Empty
+    Verify that text under 'Password' input field contains message "Minimum length is 8 characters."
+
+Register with invalid email
+    Navigate to registration page at RegisterUrl
+	Input first name Valid_Firstname
+	Input last name Valid_Lastname
+    Input username Valid_Username
+    Input email	Invalid_Email
+    Input password Valid_Password
+    Verify that text under 'Email' input field contains message "Please provide a valid email address."
+
+Register with invalid first name
+    Navigate to registration page at RegisterUrl
+	Input first name Empty
+	Input last name Valid_Lastname
+    Input username Valid_Username
+    Input email	Valid_Email
+    Input password Valid_Password
+    Verify that text under 'First name' input field contains message "This field is required."
+
+Register with invalid last name
+    Navigate to registration page at RegisterUrl
+	Input first name Valid_Firstname
+	Input last name Empty
+    Input username Valid_Username
+    Input email	Valid_Email
+    Input password Valid_Password
+    Verify that text under 'Last name' input field contains message "This field is required."
+
+
+
