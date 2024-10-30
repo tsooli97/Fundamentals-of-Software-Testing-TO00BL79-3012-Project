@@ -51,7 +51,6 @@
 
 ## 10. Write short Learning Reflection and  Free words Do you think that project helped in putting theoretical knowledge into practice? Describe? (is there anything else that you would like to share with us concerning the current study module). e.g. regarding the quality of content and your learning (or) improvement ideas? 
 -
-
     In my opinion, this project was quite effective in connecting the course theory with practical application. It allowed me to apply the various concepts from the book material and Percipio 'Software Testing Foundation' video course in a meaningful real world setting, which was helpful in bettering my understanding of planning test cases and reporting bugs. 
 
     I've personally found the course's learning style to be quite flexibile and effective (independent learning effort and pace). It has integrated well alongside my other studies and work schedule. Overall, this course has been very interesting and really helped me improve my understanding of what software testing truly involves and is about. 
