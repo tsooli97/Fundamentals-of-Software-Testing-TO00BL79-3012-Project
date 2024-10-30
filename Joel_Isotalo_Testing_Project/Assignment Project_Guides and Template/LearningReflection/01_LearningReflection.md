@@ -26,13 +26,11 @@
 
 ## 6. Did you find any trouble using Github? have you used Github before? where?
 -
- 
     I did not have any trouble with GitHub. I've used it extensively before for both Laurea and personal projects in many different programming languages.
       
 
 ## 7. If in the future if you need to automate these test cases, which framework or language will you use? and describe why (Robot Framework, Cypress, Selenium, or any other )
 - 
-
     I think I would at the very least use Selenium for test automation. Python programming familiar to me and I've used Selenium in the past for creating some automated workflows. 
 
 ## 8. Kindly search the term `Tester` `Automation Tester` glassdoor and LinkedIn or any other job search website. Currently, list the skills and competencies that are most in-demand in software testing
