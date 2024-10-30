@@ -8,7 +8,7 @@ Documentation	Issues test scenario. Create, read, update and delete operations.
 
 Pre Condition	Open browser, log in using valid credentials. Ensure that at least one project is created on the account beforehand. 
 Post Condition	Close all browsers
-Tags 
+Tags Issues, TS-4-Issues
 
 #******************* Common Variables ********************
 
